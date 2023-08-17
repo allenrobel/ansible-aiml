@@ -4,7 +4,7 @@
     hosts:
     - ubuntu
     tasks:
-    -   name: set hostname to ubuntu-ai-{{hostname}}
+    -   name: set hostname to ubuntu-ai-{{host_id}}
         ansible.builtin.hostname:
-            name: ubuntu-ai-{{hostname}}
+            name: ubuntu-ai-{{host_id}}
             use: debian
