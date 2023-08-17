@@ -1,0 +1,22 @@
+---
+# NOTE: newer apt (e.g. in Ubuntu 22.04) uses system proxy settings
+# http_proxy and https_proxy
+# The playbook below is no longer needed for latest Ubuntu
+# References (from Ubuntu 22.04 man pages):
+# man 1 apt-transport-http
+# man 1 apt-transport-https
+-   name: Add apt proxy /etc/apt/apt.conf.d/00proxy
+    become: true
+    become_user: root
+    blockinfile:
+        path: /etc/apt/apt.conf.d/00proxy
+        create: true
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+        state: present
+        block: |
+            Acquire::http::proxy "{{http_proxy}}";
+            Acquire::https::proxy "{{https_proxy}}";
+            Acquire::HTTP::proxy "{{http_proxy}}";
+            Acquire::HTTPS::proxy "{{https_proxy}}";
+

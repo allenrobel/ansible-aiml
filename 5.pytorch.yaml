@@ -1,0 +1,10 @@
+---
+-   name: install pytorch torchvision torchaudio cudatoolkit=11.3
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+        ansible.builtin.command:
+            cmd: "/home/ubuntu/anaconda3/bin/conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch"
+            creates: /home/ubuntu/anaconda3/pkgs/pytorch-2.0.1-py3.9_cpu_0.tar.bz2

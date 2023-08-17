@@ -1,0 +1,22 @@
+---
+-   name: Add system proxy to /etc/environment
+    become: true
+    become_user: root
+    blockinfile:
+        path: /etc/environment
+        create: true
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+        state: present
+        block: |
+            no_proxy=cisco.com,localhost,127.0.0.1,::1,172.26.251.99
+            NO_PROXY=cisco.com,localhost,127.0.0.1,::1,172.26.251.99
+            http_proxy=http://proxy.esl.cisco.com:80
+            https_proxy=http://proxy.esl.cisco.com:80
+            ftp_proxy=http://proxy.esl.cisco.com:80
+            socks_proxy=http://proxy.esl.cisco.com:80
+            HTTP_PROXY=http://proxy.esl.cisco.com:80
+            HTTPS_PROXY=http://proxy.esl.cisco.com:80
+            FTP_PROXY=http://proxy.esl.cisco.com:80
+            SOCKS_PROXY=http://proxy.esl.cisco.com:80
+            PIP_PROXY=http://proxy.esl.cisco.com:80

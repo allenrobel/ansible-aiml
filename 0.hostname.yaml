@@ -1,0 +1,10 @@
+---
+-   name: set hostname
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: set hostname to ubuntu-ai-{{hostname}}
+        ansible.builtin.hostname:
+            name: ubuntu-ai-{{hostname}}
+            use: debian

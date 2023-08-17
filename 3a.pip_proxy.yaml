@@ -1,0 +1,11 @@
+---
+-   name: Add pip proxy configuration {{user_home}}/.config/pip/pip.conf
+    blockinfile:
+        path: "{{user_home}}/.config/pip/pip.conf"
+        create: true
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+        state: present
+        block: |
+            [global]
+            proxy=http://proxy.esl.cisco.com:80

@@ -1,0 +1,14 @@
+---
+-   name: Add wget proxy /etc/wgetrc
+    become: true
+    become_user: root
+    blockinfile:
+        path: /etc/wgetrc
+        create: true
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+        state: present
+        block: |
+            https_proxy=http://proxy.esl.cisco.com:80/
+            http_proxy=http://proxy.esl.cisco.com:80/
+            use_proxy=on

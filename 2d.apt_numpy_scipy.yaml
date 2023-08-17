@@ -1,0 +1,12 @@
+---
+-   name: apt install python3-numpy, python-numpy, python3-scipy
+    become: true
+    become_user: root
+    ansible.builtin.package:
+        name: 
+        - python3-numpy
+        - python-numpy
+        - python3-scipy
+        state: present
+        use: apt
+

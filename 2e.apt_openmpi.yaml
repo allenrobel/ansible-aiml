@@ -1,0 +1,16 @@
+---
+-   name: apt install python3-mpi4py, libopenmpi-dev, openmpi-common, openmpi-bin, libopenmpi3, libcoarrays-openmpi-dev, libcaf-openmpi-3, libfabric1
+    become: true
+    become_user: root
+    ansible.builtin.package:
+        name:
+        - python3-mpi4py
+        - libopenmpi-dev
+        - openmpi-common
+        - openmpi-bin
+        - libopenmpi3
+        - libcoarrays-openmpi-dev
+        - libcaf-openmpi-3
+        - libfabric1
+        state: present
+        use: apt

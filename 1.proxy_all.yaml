@@ -1,0 +1,10 @@
+---
+-   name: proxy configurations
+    gather_facts: false
+    tasks:
+    - ansible.builtin.include_tasks: 1a.proxy_system.yaml
+    - ansible.builtin.include_tasks: 1b.proxy_wget.yaml
+    - ansible.builtin.include_tasks: 2a.apt_proxy.yaml
+    - ansible.builtin.include_tasks: 3a.pip_proxy.yaml
+    hosts:
+    - ubuntu

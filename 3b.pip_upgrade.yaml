@@ -1,0 +1,7 @@
+---
+-   name: "pip upgrade to latest : PIP_PROXY {{pip_proxy}} http_proxy {{http_proxy}} https_proxy {{https_proxy}}"
+    ansible.builtin.pip:
+        name: pip
+        state: latest
+        virtualenv: "{{virtual_env}}"
+        virtualenv_python: "{{virtualenv_python}}"

@@ -1,0 +1,39 @@
+---
+-   name: install Anaconda-2022.10-Linux-x86_64.sh
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: get https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+        ansible.builtin.get_url:
+            url: https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
+            dest: /tmp
+            mode: '0744'
+    -   name: "/tmp/Anaconda3-2022.10-Linux-x86_64.sh -b (-p /opt/anaconda3)"
+        ansible.builtin.command:
+            cmd: "/tmp/Anaconda3-2022.10-Linux-x86_64.sh -b"
+            creates: "/home/ubuntu/anaconda3"
+    -   name: Add /home/ubuntu/anaconda3/.condarc
+        blockinfile:
+            path: "{{user_home}}/anaconda3/.condarc"
+            create: true
+            marker: "# {mark} ANSIBLE MANAGED BLOCK"
+            insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+            state: present
+            block: |
+                channels:
+                - defaults
+
+                # Show channel URLs when displaying what is going to be downloaded and
+                # in 'conda list'. The default is False.
+                show_channel_urls: True
+                allow_other_channels: True
+
+                proxy_servers:
+                    http: http://proxy.esl.cisco.com:80
+                    https: http://proxy.esl.cisco.com:80
+
+                ssl_verify: False
+    -   name: update conda
+        ansible.builtin.command:
+            cmd: "{{user_home}}/anaconda3/bin/conda update -n base -c defaults conda -y"

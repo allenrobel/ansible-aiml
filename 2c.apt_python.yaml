@@ -1,0 +1,11 @@
+---
+-   name: "apt install {{python_version}} {{python_version}}-pip {{python_version}}.8-venv"
+    become: true
+    become_user: root
+    ansible.builtin.package:
+        name: 
+        - "{{python_version}}"
+        - "{{python_version}}.8-venv"
+        - "{{python_version}}-pip"
+        state: present
+        use: apt
