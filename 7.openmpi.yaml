@@ -1,0 +1,40 @@
+---
+-   name: build openmpi-4.1.5
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: get http://172.26.251.99/tftp/packages/openmpi-4.1.5.tar.gz
+        ansible.builtin.get_url:
+            url: http://172.26.251.99/tftp/packages/openmpi-4.1.5.tar.gz
+            dest: "{{user_home}}/openmpi-4.1.5.tar.gz"
+            mode: '0644'
+
+    -   name: uncompress openmpi-4.1.5.tar.gz
+        ansible.builtin.unarchive:
+            dest: "{{user_home}}"
+            src: "{{user_home}}/openmpi-4.1.5.tar.gz"
+            owner: ubuntu
+            group: ubuntu
+            remote_src: true
+
+    -   name: "sudo ./configure --prefix='/home/ubuntu/.openmpi'"
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: "{{user_home}}/openmpi-4.1.5"
+            cmd: "{{user_home}}/openmpi-4.1.5/configure --prefix='/home/ubuntu/.openmpi'"
+
+    -   name: "make (openmpi-4.1.5)"
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: "{{user_home}}/openmpi-4.1.5"
+            cmd: "make"
+
+    -   name: "make install (openmpi-4.1.5)"
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: "{{user_home}}/openmpi-4.1.5"
+            cmd: "make install"
