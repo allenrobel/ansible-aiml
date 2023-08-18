@@ -62,6 +62,9 @@
         opts: ro,loop
         state: mounted
 
+    # leaving for reference.
+    # this is the old way to mount
+    # prior to availability of ansible.posix.mount
     # -   name: mount /mnt/ofed
     #     become: true
     #     become_user: root
@@ -83,9 +86,19 @@
             chdir: /mnt/ofed
             cmd: "/etc/init.d/openibd restart"
 
-    -   name: umount /mnt/ofed
-        become: true
-        become_user: root
-        ansible.builtin.command:
-            chdir: /tmp
-            cmd: "umount /mnt/ofed"
+    - name: unmount /mnt/ofed
+      ansible.posix.mount:
+        path: /mnt/ofed
+        src: src="/tmp/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso"
+        fstype: cd9660
+        opts: ro,loop
+        state: unmounted
+
+    # leaving for reference.
+    # this is the old way to unmount
+    # prior to availability of ansible.posix.mount
+    # -   name: umount /mnt/ofed
+    #     become: true
+    #     become_user: root
+    #     ansible.builtin.command:
+    #         cmd: "umount /mnt/ofed"
