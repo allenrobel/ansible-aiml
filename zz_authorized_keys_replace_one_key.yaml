@@ -1,0 +1,18 @@
+---
+-   name: ssh keys setup
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: ensure ssh-key is present
+        ansible.posix.authorized_key:
+            user: "ubuntu"
+            state: present
+            key: "{{ lookup('file', '/home/root/.ssh/id_rsa.pub') }}"
+    # The old way, for reference.
+    # -   name: replace line in authorized_keys
+    #     ansible.builtin.lineinfile:
+    #         path: "/home/ubuntu/.ssh/authorized_keys"
+    #         # comment for the line you want to replace
+    #         regexp: 'arobel@cisco.com$'
+    #         line: "{{ lookup('file', '/Users/arobel/.ssh/id_rsa.pub') }}"
