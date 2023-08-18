@@ -1,0 +1,16 @@
+---
+-   name: set hostname
+    gather_facts: false
+    hosts:
+    - ubuntu
+    become: true
+    become_user: root
+    tasks:
+    -   name: copy {{ inventory_hostname }}.00-installer-config.yaml to /etc/netplan/00-installer-config.yaml
+        ansible.builtin.copy:
+            src: /Users/arobel/repos/ansible-aiml/netplan/{{ inventory_hostname }}.00-installer-config.yaml
+            dest: /etc/netplan/00-installer-config.yaml
+            owner: root
+            group: root
+            mode: '0644'
+            backup: yes
