@@ -1,0 +1,91 @@
+---
+-   name: build MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64
+    gather_facts: false
+    hosts:
+    - ubuntu
+    become: true
+    become_user: root
+    tasks:
+    # unmount to avoid error with mount task
+    -   name: unmount /mnt/ofed if it is mounted
+        ansible.posix.mount:
+            path: /mnt/ofed
+            state: unmounted
+
+    -   name: apt install MLNX_OFED package dependencies
+        become: true
+        become_user: root
+        ansible.builtin.package:
+            name: "{{item}}"
+            state: present
+            use: apt
+        loop:
+        - bison
+        - build-essential
+        - bzip2
+        - chrpath
+        - debhelper
+        - dh-autoreconf
+        - dh-python
+        - dpatch
+        - flex
+        - gcc
+        - graphviz
+        - make
+        - pkg-config
+        - python3
+        - python3-distutils
+        - quilt
+        - swig
+        - tk
+        - tcl
+
+    -   name: get http://172.26.251.99/tftp/mlx/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso
+        ansible.builtin.get_url:
+            url: http://172.26.251.99/tftp/mlx/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso
+            dest: "/tmp"
+            mode: '0644'
+
+    -   name: Create /mnt/ofed if it doesn't exist
+        become: true
+        become_user: root
+        ansible.builtin.file:
+            path: /mnt/ofed
+            state: directory
+            mode: '0755'
+
+    - name: mount /mnt/ofed
+      ansible.posix.mount:
+        path: /mnt/ofed
+        src: src="/tmp/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso"
+        fstype: cd9660
+        opts: ro,loop
+        state: mounted
+
+    # -   name: mount /mnt/ofed
+    #     become: true
+    #     become_user: root
+    #     ansible.builtin.command:
+    #         chdir: /tmp
+    #         cmd: "mount -o ro,loop MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso /mnt/ofed"
+
+    -   name: exec /mnt/ofed/mlnxofedinstall
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: /mnt/ofed
+            cmd: "/mnt/ofed/mlnxofedinstall --without-dkms --enable-opensm --add-kernel-support --without-fw-update --force"
+
+    -   name: exec /etc/init.d/openibd restart
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: /mnt/ofed
+            cmd: "/etc/init.d/openibd restart"
+
+    -   name: umount /mnt/ofed
+        become: true
+        become_user: root
+        ansible.builtin.command:
+            chdir: /tmp
+            cmd: "umount /mnt/ofed"
