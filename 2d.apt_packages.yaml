@@ -1,0 +1,27 @@
+---
+-   name: apt install packages
+    become: true
+    become_user: root
+    ansible.builtin.package:
+        name: "{{item}}"
+        state: present
+        use: apt
+    loop:
+    - lam-runtime
+    - liblam4
+    - mpich
+    - slurm-wlm-torque
+    - python3-pip
+    - python3-numpy
+    - python3-matplotlib
+    - python3-scipy
+    - python3-future
+    - python3-mpi4py
+    - openmpi-bin
+    - openmpi-common
+    - libopenmpi3
+    - libcoarrays-openmpi-dev
+    - libcaf-openmpi-3
+    - libopenmpi-dev
+    - libfabric1
+    - libgtk2.0-dev

@@ -1,0 +1,24 @@
+---
+-   name: apt install MLNX_OFED package dependencies
+    become: true
+    become_user: root
+    ansible.builtin.package:
+        name: "{{item}}"
+        state: present
+        use: apt
+    loop:
+    - build-essential
+    - dh-autoreconf
+    - make
+    - bzip2
+    - quilt
+    - pkg-config
+    - python3
+    - dpatch
+    - chrpath
+    - swig
+    - python3-distutils
+    - gcc
+    - graphviz
+    - debhelper
+    - dh-python
