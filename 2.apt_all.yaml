@@ -2,9 +2,9 @@
 -   name: package installation
     gather_facts: false
     tasks:
-    # - ansible.builtin.include_tasks: 2a.apt_proxy.yaml
-    # - ansible.builtin.include_tasks: 2b.apt_update_upgrade.yaml
-    # - ansible.builtin.include_tasks: 2c.apt_python.yaml
+    - ansible.builtin.include_tasks: 2a.apt_proxy.yaml
+    - ansible.builtin.include_tasks: 2b.apt_update_upgrade.yaml
+    - ansible.builtin.include_tasks: 2c.apt_python.yaml
     - ansible.builtin.include_tasks: 2d.apt_packages.yaml
     hosts:
     - ubuntu
