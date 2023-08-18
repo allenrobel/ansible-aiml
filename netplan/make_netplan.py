@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import ipaddress
+DEST_DIR = '/Users/arobel/repos/ansible-aiml/netplan'
 
 def make_netplan(host):
     return f"""
@@ -40,5 +40,6 @@ network:
                 via: 172.16.{host}.1
                 metric: 100
 """
-for host in range(148,149):
-    print(make_netplan(host))
+for host in range(101,149):
+    with open(f'{DEST_DIR}/{host}.00-installer-config.yaml', 'w') as f:
+        f.write(make_netplan(host))
