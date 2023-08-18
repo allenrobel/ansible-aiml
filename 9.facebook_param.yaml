@@ -11,9 +11,5 @@
             repo: https://github.com/facebookresearch/param
             dest: "{{user_home}}/param"
             force: yes
-    -   name: install param
-        ansible.builtin.shell:
-            chdir: "{{user_home}}/param"
-            cmd: python setup.py install
 
 
