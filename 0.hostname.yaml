@@ -3,8 +3,23 @@
     gather_facts: false
     hosts:
     - ubuntu
+    become: true
+    become_user: root
     tasks:
-    -   name: set hostname to ubuntu-ai-{{host_id}}
+    -   name: set hostname
         ansible.builtin.hostname:
             name: ubuntu-ai-{{host_id}}
             use: debian
+    -   name: set hostname in /etc/hosts
+        ansible.builtin.lineinfile:
+            path: /etc/hosts
+            regexp: '^127\.0\.1\.1'
+            line: '127.0.1.1 ubuntu-ai-{{host_id}}'
+            state: present
+    # The first task above also sets /etc/hostname, so the following is not needed.
+    # Keeping it here for reference.
+    # -   name: set hostname in /etc/hostname
+    #     ansible.builtin.lineinfile:
+    #         path: /etc/hostname
+    #         line: 'ubuntu-ai-{{host_id}}'
+    #         state: present
