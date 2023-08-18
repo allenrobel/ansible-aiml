@@ -42,5 +42,6 @@ network:
                 metric: 100
 """
 for host in range(101,149):
-    with open(f'{DEST_DIR}/{host}.00-installer-config.yaml', 'w') as f:
+    # print(f"Writing {DEST_DIR}/u{host}.00-installer-config.yaml")
+    with open(f'{DEST_DIR}/u{host}.00-installer-config.yaml', 'w') as f:
         f.write(make_netplan(host))
