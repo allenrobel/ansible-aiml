@@ -1,0 +1,16 @@
+---
+-   name: StrictHostKeyChecking no
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: /home/ubuntu/.ssh/config -> StrictHostKeyChecking no
+        blockinfile:
+            path: "{{user_home}}/.ssh/config"
+            create: true
+            marker: "# {mark} ANSIBLE MANAGED BLOCK"
+            insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+            state: present
+            block: |
+                Host *
+                    StrictHostKeyChecking no

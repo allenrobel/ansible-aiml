@@ -1,0 +1,22 @@
+# generate ssh keys and copy to all other proxy_servers
+# ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"
+# ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@proxy_server
+---
+-   name: ssh keys setup
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: get the hostname
+        ansible.builtin.command:
+            cmd: hostname
+        register: r1
+    -   name: generate ssh keys
+        ansible.builtin.openssh_keypair:
+            path: "{{user_home}}/.ssh/id_rsa"
+            comment: "ubuntu@{{r1.stdout_lines[0]}}"
+
+    # -  name: ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@172.26.251.{{hostvars[item].host_id + 100}}
+    #     ansible.builtin.command:
+    #        cmd: ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@172.26.251.{{hostvars[item].host_id + 100}}
+    #     with_items: "{{ groups['ubuntu'] }}"

@@ -1,0 +1,11 @@
+# copy ssh keys to local known_hosts
+---
+-   name: copy ssh keys from all servers to authorized_keys
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   ansible.builtin.fetch:
+            src: /home/ubuntu/.ssh/id_rsa.pub
+            dest: /Users/arobel/repos/ansible-aiml/authorized_keys/{{ inventory_hostname }}-authorized_keys.txt
+            flat: yes
