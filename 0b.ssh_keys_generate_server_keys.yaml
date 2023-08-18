@@ -15,8 +15,3 @@
         ansible.builtin.openssh_keypair:
             path: "{{user_home}}/.ssh/id_rsa"
             comment: "ubuntu@{{r1.stdout_lines[0]}}"
-
-    # -  name: ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@172.26.251.{{hostvars[item].host_id + 100}}
-    #     ansible.builtin.command:
-    #        cmd: ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@172.26.251.{{hostvars[item].host_id + 100}}
-    #     with_items: "{{ groups['ubuntu'] }}"

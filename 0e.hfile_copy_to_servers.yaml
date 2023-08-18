@@ -3,15 +3,9 @@
     gather_facts: false
     hosts:
     - ubuntu
-    # become: true
-    # become_user: root
     tasks:
     -   name: copy hfile to /home/ubuntu/hfile
         ansible.builtin.copy:
             src: /Users/arobel/repos/ansible-aiml/hfile/hfile
             dest: "{{user_home}}/hfile"
-            # owner: root
-            # group: root
             mode: '0644'
-            # backup: yes
-        # with_items: "{{ groups['ubuntu'] }}"

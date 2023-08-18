@@ -8,8 +8,4 @@
         ansible.builtin.copy:
             src: /Users/arobel/repos/ansible-aiml/authorized_keys/authorized_keys
             dest: "{{user_home}}/.ssh/authorized_keys"
-            # owner: root
-            # group: root
             mode: '0600'
-            # backup: yes
-        # with_items: "{{ groups['ubuntu'] }}"
