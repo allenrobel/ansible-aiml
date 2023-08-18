@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-DEST_DIR = '/Users/arobel/repos/ansible-aiml/netplan'
+from os import environ
+DEST_DIR = f"{environ['HOME']}/repos/ansible-aiml/netplan"
 
 def make_netplan(host):
     return f"""

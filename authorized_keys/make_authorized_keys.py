@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-DEST_DIR = '/Users/arobel/repos/ansible-aiml/authorized_keys'
+DEST_DIR = f"{os.environ['HOME']}/repos/ansible-aiml/authorized_keys"
 
 authorized_keys = ""
 for filename in os.listdir(DEST_DIR):
