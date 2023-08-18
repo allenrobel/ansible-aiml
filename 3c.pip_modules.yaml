@@ -1,0 +1,21 @@
+---
+-   name: pip install python modules
+    ansible.builtin.pip:
+        name: "{{item}}"
+        virtualenv: "{{virtual_env}}"
+        virtualenv_python: "{{virtualenv_python}}"
+    loop:
+    # apex required for facebookresearch/param
+    -   apex
+    -   future
+    -   matplotlib
+    -   numpy
+    -   scipy
+    -   torchvision
+    -   virtualenv
+-   name: pip install torch 1.13.0
+    ansible.builtin.pip:
+        name: torch
+        version: 1.13.0
+        virtualenv: "{{virtual_env}}"
+        virtualenv_python: "{{virtualenv_python}}"
