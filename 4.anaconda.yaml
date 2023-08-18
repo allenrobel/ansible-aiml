@@ -34,6 +34,10 @@
                     https: http://proxy.esl.cisco.com:80
 
                 ssl_verify: False
+    -   name: conda init
+        ansible.builtin.command:
+            chdir: "{{user_home}}/anaconda3/condabin"
+            cmd: "{{user_home}}/anaconda3/condabin/conda init"
     -   name: update conda
         ansible.builtin.command:
             cmd: "{{user_home}}/anaconda3/bin/conda update -n base -c defaults conda -y"
