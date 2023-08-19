@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-DEST_DIR = '/Users/arobel/repos/ansible-aiml/hfile'
+from os import environ
+DEST_DIR = f"{environ['HOME']}repos/ansible-aiml/hfile"
 
 hfile = ""
 for host in range(101,149):
