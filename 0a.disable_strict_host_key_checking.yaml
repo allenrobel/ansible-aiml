@@ -9,7 +9,7 @@
             path: "{{user_home}}/.ssh/config"
             create: true
             marker: "# {mark} ANSIBLE MANAGED BLOCK"
-            insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+            insertafter: "# BEGIN ANSIBLE MANAGED BLOCK"
             state: present
             block: |
                 Host *
