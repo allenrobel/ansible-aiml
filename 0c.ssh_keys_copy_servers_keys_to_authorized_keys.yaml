@@ -7,5 +7,5 @@
     tasks:
     -   ansible.builtin.fetch:
             src: /home/ubuntu/.ssh/id_rsa.pub
-            dest: /Users/arobel/repos/ansible-aiml/authorized_keys/{{ inventory_hostname }}-authorized_keys.txt
+            dest: "{{local_home}}/repos/ansible-aiml/authorized_keys/{{ inventory_hostname }}-authorized_keys.txt"
             flat: yes

@@ -6,6 +6,6 @@
     tasks:
     -   name: copy hfile to /home/ubuntu/hfile
         ansible.builtin.copy:
-            src: /Users/arobel/repos/ansible-aiml/hfile/hfile
+            src: "{{local_home}}/repos/ansible-aiml/hfile/hfile"
             dest: "{{user_home}}/hfile"
             mode: '0644'
