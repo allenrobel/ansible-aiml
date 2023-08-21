@@ -17,6 +17,7 @@
     - python3-scipy
     - python3-future
     - python3-mpi4py
+    - python3-virtualenv
     - openmpi-bin
     - openmpi-common
     - libopenmpi3
