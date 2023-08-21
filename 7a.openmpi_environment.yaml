@@ -1,0 +1,27 @@
+---
+-   name: build openmpi-4.1.5
+    gather_facts: false
+    hosts:
+    - ubuntu
+    tasks:
+    -   name: read .bashrc on login
+        blockinfile:
+            path: "{{user_home}}/.bash_profile"
+            create: true
+            marker: "# {mark} ANSIBLE MANAGED BLOCK"
+            insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+            state: present
+            block: |
+                if [ -f ~/.bashrc ]; then
+                . ~/.bashrc
+                fi
+    -   name: set openmpi environment variables in .bashrc
+        blockinfile:
+            path: "{{user_home}}/.bashrc"
+            create: true
+            marker: "# {mark} ANSIBLE MANAGED BLOCK"
+            insertafter: '# BEGIN ANSIBLE MANAGED BLOCK'
+            state: present
+            block: |
+                export PATH=”$PATH:/home/ubuntu/.openmpi/bin”
+                export LD_LIBRARY_PATH=”$LD_LIBRARY_PATH:/home/ubuntu/.openmpi/lib”
