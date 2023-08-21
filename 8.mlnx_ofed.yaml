@@ -57,7 +57,7 @@
     - name: mount /mnt/ofed
       ansible.posix.mount:
         path: /mnt/ofed
-        src: src="/tmp/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso"
+        src: src=/tmp/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso
         fstype: cd9660
         opts: ro,loop
         state: mounted
@@ -90,7 +90,7 @@
       ansible.posix.mount:
         path: /mnt/ofed
         src: src="/tmp/MLNX_OFED_LINUX-5.8-3.0.7.0-ubuntu20.04-x86_64.iso"
-        fstype: cd9660
+        fstype: iso9660
         opts: ro,loop
         state: unmounted
 
