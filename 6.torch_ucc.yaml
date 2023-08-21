@@ -16,17 +16,15 @@
             owner: ubuntu
             group: ubuntu
             remote_src: true
+    -   name: install torch_ucc dependencies torch===1.13.0 torchvision
+        become: true
+        become_user: root
+        ansible.builtin.shell:
+            chdir: "{{user_home}}/torch_ucc"
+            cmd: python3 -m pip install torch===1.13.0 torchvision -f https://download.pytorch.org/whl/torch_stable.html
     -   name: install torch_ucc
         become: true
         become_user: root
-        environment:
-            UCX_HOME: "{{user_home}}/ucx/install"
-            UCC_HOME: "{{user_home}}/ucc/install"
-            WITH_CUDA: no
-            CUDA_HOME: ""
-            VIRTUAL_ENV: /home/ubuntu/py311
-            VIRTUAL_ENV_DISABLE_PROMPT: true
-            PYTHONPATH: /usr/lib/python3.8:/usr/lib/python3.8/lib-dynload:/home/ubuntu/py311/lib/python3.8/site-packages
         ansible.builtin.shell:
             chdir: "{{user_home}}/torch_ucc"
-            cmd: python3 setup.py install
+            cmd: UCX_HOME=${HOME}/ucx/install UCC_HOME=${HOME}/ucc/install WITH_CUDA=no python3 setup.py install
