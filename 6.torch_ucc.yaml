@@ -29,4 +29,4 @@
             PYTHONPATH: /usr/lib/python3.8:/usr/lib/python3.8/lib-dynload:/home/ubuntu/py311/lib/python3.8/site-packages
         ansible.builtin.shell:
             chdir: "{{user_home}}/torch_ucc"
-            cmd: python setup.py install
+            cmd: python3 setup.py install
