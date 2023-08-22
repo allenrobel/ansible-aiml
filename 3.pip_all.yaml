@@ -6,4 +6,3 @@
     tasks:
     - ansible.builtin.include_tasks: 3a.pip_proxy.yaml
     - ansible.builtin.include_tasks: 3b.pip_upgrade.yaml
-    - ansible.builtin.include_tasks: 3c.pip_modules.yaml
