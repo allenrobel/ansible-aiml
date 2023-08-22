@@ -32,9 +32,9 @@
             chdir: "{{user_home}}/openmpi-4.1.5"
             cmd: "make"
 
-    -   name: "make install (openmpi-4.1.5)"
+    -   name: "make all install (openmpi-4.1.5)"
         become: true
         become_user: root
         ansible.builtin.command:
             chdir: "{{user_home}}/openmpi-4.1.5"
-            cmd: "make install"
+            cmd: "make all install"
